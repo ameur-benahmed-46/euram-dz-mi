@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clock</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Gotham Rounded , sans-serif;
+    }
+    body{
+      min-height: 100vh;
+      background:linear-gradient(27deg,#111,#333,#555);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .clock{
+      width: 300px;
+      height: 300px;
+      background-color:#222;
+      border-radius: 50%;
+      border: 2px solid #858080;
+      position: relative;
+    }   
+    .clock::after{
+      content: "";
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background-color: white;
+      z-index: 50;
+    }
+    .clock .number{
+      padding: 5px;
+      font-size: 22px;
+      color:#858080;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transform: rotate(var(--i));
+    }
+    .clock .hand{
+      --j:0;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      background-color: #858080;
+      transform-origin:bottom;
+      transform: translateX(-50%) rotate(calc(var(--j) * 1deg));
+      border: 1px solid white;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      z-index: 10px;
+    }
+
+    .clock .hand.second{
+      width: 3px;
+      height:43%;
+      background-color: red;
+    }
+    .clock .hand.minute{
+      width: 7px;
+      height:40%;
+      background-color: #858080;
+
+    }
+    .clock .hand.hour{
+      width: 10px;
+      height:35%;
+      background-color: #858080;
+
+    }
+
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="hand hour"   data-h></div>
+    <div class="hand minute" data-m></div>
+    <div class="hand second" data-s></div>
+    <div class="number" style="--i:30deg" >1</div>
+    <div class="number" style="--i:60deg" >2</div>
+    <div class="number" style="--i:90deg" >3</div>
+    <div class="number" style="--i:120deg">4</div>
+    <div class="number" style="--i:150deg">5</div>
+    <div class="number" style="--i:180deg">6</div>
+    <div class="number" style="--i:210deg">7</div>
+    <div class="number" style="--i:240deg">8</div>
+    <div class="number" style="--i:270deg">9</div>
+    <div class="number" style="--i:300deg">10</div>
+    <div class="number" style="--i:330deg">11</div>
+    <div class="number" style="--i:000deg">12</div>
+  </div>
+
+  <script>
+    setInterval(setClock, 1000);
+    let h = document.querySelector("[data-h]")
+    let m = document.querySelector("[data-m]")
+    let s = document.querySelector("[data-s]")
+
+    let x = new Date()
+    function setClock() {
+  
+      const currenDate = new Date();
+
+      const second = currenDate.getSeconds() /  60 
+
+      const minut =( second +  currenDate.getMinutes() )/  60 
+
+      const hour = (minut + currenDate.getHours() )/  12 
+      
+      tdwir39rib(s,second)
+      tdwir39rib(m,minut)
+      tdwir39rib(h,hour)
+    }
+
+    function tdwir39rib(element , nisbatdwir){
+      element.style.setProperty("--j" , nisbatdwir * 360 )
+    }
+
+  </script>
+</body>
+</html>
